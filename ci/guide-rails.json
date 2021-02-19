@@ -1,0 +1,792 @@
+{
+	"metadata": {
+		"version": 2
+	},
+	"application": {
+		"name": "simple-hello-world-java",
+		"language": "JAVA_MAVEN",
+		"artifact_store": {
+			"type": "s3",
+			"repositories": [
+				{
+					"category": "rc-packaging",
+					"bucket": "guide-rails-calculi-rc"
+				},
+				{
+					"category": "final-packaging",
+					"bucket": "guide-rails-calculi-final"
+				},
+				{
+					"category": "logs",
+					"bucket": "guide-rails-calculi-logs"
+				}
+			]
+		}
+	},
+	"pipeline": {
+		"segments": [
+			{
+				"name": "Build",
+				"segment_type": "build",
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"code_analysis": {
+							"publish": true,
+							"properties": null
+						},
+						"delete_instances": true
+					},
+					"on_success": {
+						"code_analysis": null
+					},
+					"on_failure": {
+						"code_analysis": null
+					},
+					"on_abort": {
+						"code_analysis": null
+					}
+				},
+				"deployment_strategy": {
+					"canary_watch_time": "",
+					"update_watch_time": "",
+					"serial": false
+				},
+				"application_init": {},
+				"packages": [
+					{
+						"name": "HelloWorld",
+						"downloads": [],
+						"files": [
+							"target/HelloWorld*"
+						]
+					},
+					{
+						"name": "jdk",
+						"downloads": [
+							{
+								"link": "https://s3.amazonaws.com/calculi-middleware/jdk-((jdk.version))_linux-x64_bin.tar.gz",
+								"name": "jdk.tar.gz"
+							}
+						],
+						"package_install_command": "tar xzf jdk/jdk.tar.gz\ncp -Rf jdk-((jdk.version))/* ${BOSH_INSTALL_TARGET}"
+					}
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "print env",
+								"definition": "print env",
+								"command": "env | sort",
+								"properties": null
+							},
+							{
+								"name": "build",
+								"definition": "build",
+								"command": "mvn compile\n",
+								"properties": null
+							},
+							{
+								"name": "test",
+								"definition": "test",
+								"command": "mvn surefire-report:report \n\nmvn cobertura:cobertura  -Dcobertura.report.format=xml  -Dcobertura.aggregate=true install -e",
+								"properties": null
+							},
+							{
+								"name": "create jar",
+								"definition": "create jar",
+								"command": "echo \"application version ${APPLICATION_VERSION}\"\nmvn versions:set -DnewVersion=${APPLICATION_VERSION}\nmvn package",
+								"properties": null
+							},
+							{
+								"name": "list ",
+								"definition": "list ",
+								"command": "ls -R",
+								"properties": null
+							}
+						],
+						"docker_options": {}
+					},
+					{
+						"name": "print-echo",
+						"steps": [
+							{
+								"name": "print echo",
+								"definition": "print echo",
+								"command": "echo \"print me\" ",
+								"properties": null
+							}
+						],
+						"docker_options": {
+							"repository": "node:10"
+						}
+					}
+				]
+			},
+			{
+				"name": "Integration",
+				"segment_type": "integration",
+				"run_after": [
+					"Build"
+				],
+				"job_steps": [
+					{
+						"name": "perform test",
+						"definition": "perform test",
+						"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
+						"properties": null
+					}
+				],
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"code_analysis": {
+							"properties": null
+						},
+						"delete_instances": true
+					},
+					"on_success": {
+						"code_analysis": {
+							"properties": null
+						}
+					},
+					"on_failure": {
+						"code_analysis": {
+							"properties": null
+						}
+					},
+					"on_abort": {
+						"code_analysis": {
+							"properties": null
+						}
+					}
+				},
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "120000-240000",
+					"update_watch_time": "120000-240000",
+					"serial": false
+				},
+				"application_init": {},
+				"process": {
+					"init": {}
+				},
+				"package_dependencies": [
+					"HelloWorld",
+					"jdk"
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"instance_groups": [
+					{
+						"name": "((application.name))",
+						"number_of_instances": 1,
+						"cloud_provider_type": "aws",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
+						"os_type": "default",
+						"networks": [
+							"integration"
+						],
+						"availability_zones": [
+							"default"
+						],
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "120000-240000",
+							"update_watch_time": "120000-240000",
+							"serial": false
+						},
+						"dependencies": [
+							{
+								"name": "consul",
+								"release": "consul",
+								"provides": [
+									{
+										"name": "consul_servers.as",
+										"value": "consul_1"
+									}
+								],
+								"consumes": [
+									{
+										"name": "consul_servers.from",
+										"value": "consul_1"
+									}
+								],
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((consul.servicename))"
+									},
+									{
+										"name": "consul.environment",
+										"value": "((consul.environment))"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "((consul.datacenter))"
+									},
+									{
+										"name": "consul.server",
+										"value": "false"
+									},
+									{
+										"name": "consul.joinservers",
+										"value": "((consul.joinservers))"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "grsecret:tls.cert"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "grsecret:tls.key"
+									}
+								]
+							}
+						]
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {}
+			},
+			{
+				"name": "Isolation",
+				"segment_type": "isolation",
+				"persistent": true,
+				"run_after": [
+					"Build"
+				],
+				"job_steps": [
+					{
+						"name": "known failing command",
+						"definition": "known failing command",
+						"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"",
+						"properties": null
+					}
+				],
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"notifications": [],
+						"code_analysis": {
+							"properties": null
+						},
+						"delete_instances": true
+					}
+				},
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "5000-30000",
+					"update_watch_time": "5000-30000",
+					"serial": false
+				},
+				"application_init": {},
+				"process": {
+					"init": {}
+				},
+				"package_dependencies": [
+					"HelloWorld",
+					"jdk"
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"instance_groups": [
+					{
+						"name": "((application.name))",
+						"number_of_instances": 1,
+						"cloud_provider_type": "aws",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
+						"os_type": "default",
+						"networks": [
+							"isolation"
+						],
+						"availability_zones": [
+							"default"
+						],
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "5000-30000",
+							"update_watch_time": "5000-30000",
+							"serial": false
+						},
+						"dependencies": [
+							{
+								"name": "consul",
+								"release": "consul",
+								"provides": [
+									{
+										"name": "consul_servers.as",
+										"value": "consul_1"
+									}
+								],
+								"consumes": [
+									{
+										"name": "consul_servers.from",
+										"value": "consul_1"
+									}
+								],
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((consul.servicename))"
+									},
+									{
+										"name": "consul.environment",
+										"value": "((consul.environment))"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "((consul.datacenter))"
+									},
+									{
+										"name": "consul.server",
+										"value": "false"
+									},
+									{
+										"name": "consul.joinservers",
+										"value": "((consul.joinservers))"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "grsecret:tls.cert"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "grsecret:tls.key"
+									}
+								]
+							}
+						]
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				}
+			},
+			{
+				"name": "Release",
+				"segment_type": "release",
+				"persistent": true,
+				"run_after": [
+					"Integration",
+					"Isolation"
+				],
+				"job_steps": [
+					{
+						"name": "perform tests again",
+						"definition": "perform tests again",
+						"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
+						"properties": null
+					}
+				],
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"code_analysis": {
+							"properties": null
+						},
+						"delete_instances": true
+					}
+				},
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "5000-30000",
+					"update_watch_time": "5000-30000",
+					"serial": false
+				},
+				"application_init": {},
+				"process": {
+					"init": {
+						"command": "bin/start-service.sh "
+					}
+				},
+				"package_dependencies": [
+					"HelloWorld",
+					"jdk"
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"instance_groups": [
+					{
+						"name": "((application.name))",
+						"number_of_instances": 1,
+						"cloud_provider_type": "aws",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
+						"os_type": "default",
+						"networks": [
+							"release"
+						],
+						"availability_zones": [
+							"default"
+						],
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "5000-30000",
+							"update_watch_time": "5000-30000",
+							"serial": false
+						},
+						"dependencies": [
+							{
+								"name": "consul",
+								"release": "consul",
+								"provides": [
+									{
+										"name": "consul_servers.as",
+										"value": "consul_1"
+									}
+								],
+								"consumes": [
+									{
+										"name": "consul_servers.from",
+										"value": "consul_1"
+									}
+								],
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((consul.servicename))"
+									},
+									{
+										"name": "consul.environment",
+										"value": "((consul.environment))"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "((consul.datacenter))"
+									},
+									{
+										"name": "consul.server",
+										"value": "false"
+									},
+									{
+										"name": "consul.joinservers",
+										"value": "((consul.joinservers))"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "grsecret:tls.cert"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "grsecret:tls.key"
+									}
+								]
+							}
+						]
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				}
+			},
+			{
+				"name": "Production",
+				"segment_type": "production",
+				"run_after": [
+					"Release"
+				],
+				"job_steps": [
+					{
+						"name": "perform prod test",
+						"definition": "perform prod test",
+						"command": "bin/integration-test.sh \u003e ${APPLICATION_LOGS_DIR}/output.txt",
+						"properties": null
+					},
+					{
+						"name": "get prod IP",
+						"definition": "get prod IP",
+						"command": "ip a",
+						"properties": null
+					}
+				],
+				"exit_actions": {
+					"default": {
+						"fetch_logs": true,
+						"code_analysis": {
+							"properties": null
+						}
+					},
+					"on_success": {
+						"code_analysis": {
+							"properties": null
+						}
+					},
+					"on_failure": {
+						"code_analysis": {
+							"properties": null
+						}
+					},
+					"on_abort": {
+						"code_analysis": {
+							"properties": null
+						}
+					}
+				},
+				"deployment_strategy": {
+					"canaries": 1,
+					"max_in_flight": 1,
+					"canary_watch_time": "120000-240000",
+					"update_watch_time": "120000-240000",
+					"serial": false
+				},
+				"application_init": {},
+				"process": {
+					"init": {
+						"command": "bin/start-service.sh "
+					}
+				},
+				"package_dependencies": [
+					"HelloWorld",
+					"jdk"
+				],
+				"instance_tags": [
+					{
+						"name": "application.name",
+						"value": "((application.name))"
+					}
+				],
+				"instance_groups": [
+					{
+						"name": "((application.name))",
+						"number_of_instances": 1,
+						"cloud_provider_type": "aws",
+						"cloud_provider_name": "guide-rails-aws-us-west-2",
+						"vm_type": "default",
+						"os_type": "default",
+						"networks": [
+							"production"
+						],
+						"availability_zones": [
+							"default"
+						],
+						"deployment_strategy": {
+							"canaries": 1,
+							"max_in_flight": 1,
+							"canary_watch_time": "120000-240000",
+							"update_watch_time": "120000-240000",
+							"serial": false
+						},
+						"dependencies": [
+							{
+								"name": "consul",
+								"release": "consul",
+								"provides": [
+									{
+										"name": "consul_servers.as",
+										"value": "consul_1"
+									}
+								],
+								"consumes": [
+									{
+										"name": "consul_servers.from",
+										"value": "consul_1"
+									}
+								],
+								"properties": [
+									{
+										"name": "consul.servicename",
+										"value": "((consul.servicename))"
+									},
+									{
+										"name": "consul.environment",
+										"value": "((consul.environment))"
+									},
+									{
+										"name": "consul.datacenter",
+										"value": "((consul.datacenter))"
+									},
+									{
+										"name": "consul.server",
+										"value": "false"
+									},
+									{
+										"name": "consul.joinservers",
+										"value": "((consul.joinservers))"
+									},
+									{
+										"name": "calculi.intermediate.cert",
+										"value": "grsecret:tls.cert"
+									},
+									{
+										"name": "calculi.intermediate.key",
+										"value": "grsecret:tls.key"
+									}
+								]
+							}
+						]
+					}
+				],
+				"post_deployment_actions": {
+					"instances": null,
+					"loadbalanced": false,
+					"loadbalancer": {
+						"TargetGroupName": "",
+						"TargetGroupPort": 0,
+						"TargetGroupProtocol": "",
+						"TargetType": "",
+						"VPCID": "",
+						"HealthCheckEnabled": false,
+						"HealthCheckPort": "",
+						"UnhealthyThresholdCount": 0
+					}
+				},
+				"cache_info": {}
+			}
+		],
+		"exit_actions": {
+			"default": {
+				"fetch_logs": true,
+				"code_analysis": {
+					"publish": true,
+					"properties": []
+				},
+				"delete_instances": true
+			},
+			"on_success": {
+				"code_analysis": null
+			},
+			"on_failure": {
+				"code_analysis": null
+			},
+			"on_abort": {
+				"code_analysis": null
+			}
+		},
+		"default_properties": [
+			{
+				"name": "centos.release.build",
+				"value": true,
+				"type": "boolean"
+			},
+			{
+				"name": "gr.host.address",
+				"value": " ",
+				"type": "string"
+			},
+			{
+				"name": "gr.veracode.static.scan",
+				"value": "false",
+				"type": "string"
+			},
+			{
+				"name": "jdk.version",
+				"value": "12",
+				"type": "string"
+			},
+			{
+				"name": "source_dirs",
+				"value": "./",
+				"type": "string"
+			},
+			{
+				"name": "warden.centos.release.build",
+				"value": true,
+				"type": "boolean"
+			}
+		],
+		"deployment_files": [
+			{
+				"source_path": "ci/bin/start-service.sh",
+				"target_path": "bin/start-service.sh"
+			},
+			{
+				"source_path": "ci/bin/integration-test.sh",
+				"target_path": "bin/integration-test.sh"
+			}
+		],
+		"application_init": {},
+		"process": {
+			"init": {
+				"command": "bin/start-service.sh"
+			}
+		},
+		"releases": [
+			{
+				"name": "consul",
+				"version": "latest"
+			}
+		]
+	},
+	"organization": {
+		"orgname": "Tutorial"
+	}
+}

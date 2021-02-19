@@ -1,0 +1,18 @@
+{
+   "service":{
+      "name":"<%= p('consul.servicename') %>",
+      "tags":[
+        "<%= p('consul.tag') %>"
+      ],
+      "address":"",
+      "port":<%= p("server.port") %>,
+      "enable_tag_override":false,
+      "check": {
+        "id": "<%= p('application.name') %>-hc",
+        "name": "<%= p('application.name') %> health check",
+        "args": ["curl", "-f", "--cacert", "<%= p('tls.ca.path') %>/<%= p('consul.environment') %>.cert.pem", "https://127.0.0.1:<%= p('server.port') %>/z/health?service=<%= p('grpc.service.name') %>"],
+        "interval": "<%= p('hc.interval', '10s') %>",
+        "timeout": "<%= p('hc.request.timeout', '1s') %>"
+      }
+   }
+}
