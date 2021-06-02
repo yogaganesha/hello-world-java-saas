@@ -79,18 +79,7 @@
 					}
 				],
 				"post_deployment_actions": {
-					"instances": null,
-					"loadbalanced": false,
-					"loadbalancer": {
-						"TargetGroupName": "",
-						"TargetGroupPort": 0,
-						"TargetGroupProtocol": "",
-						"TargetType": "",
-						"VPCID": "",
-						"HealthCheckEnabled": false,
-						"HealthCheckPort": "",
-						"UnhealthyThresholdCount": 0
-					}
+					"loadbalancer": {}
 				},
 				"cache_info": {},
 				"tasks": [
@@ -277,20 +266,15 @@
 					}
 				],
 				"post_deployment_actions": {
-					"instances": null,
-					"loadbalanced": false,
-					"loadbalancer": {
-						"TargetGroupName": "",
-						"TargetGroupPort": 0,
-						"TargetGroupProtocol": "",
-						"TargetType": "",
-						"VPCID": "",
-						"HealthCheckEnabled": false,
-						"HealthCheckPort": "",
-						"UnhealthyThresholdCount": 0
-					}
+					"loadbalancer": {}
 				},
-				"cache_info": {}
+				"cache_info": {},
+				"releases": [
+					{
+						"name": "consul",
+						"version": "latest"
+					}
+				]
 			},
 			{
 				"name": "Isolation",
@@ -409,19 +393,14 @@
 					}
 				],
 				"post_deployment_actions": {
-					"instances": null,
-					"loadbalanced": false,
-					"loadbalancer": {
-						"TargetGroupName": "",
-						"TargetGroupPort": 0,
-						"TargetGroupProtocol": "",
-						"TargetType": "",
-						"VPCID": "",
-						"HealthCheckEnabled": false,
-						"HealthCheckPort": "",
-						"UnhealthyThresholdCount": 0
+					"loadbalancer": {}
+				},
+				"releases": [
+					{
+						"name": "consul",
+						"version": "latest"
 					}
-				}
+				]
 			},
 			{
 				"name": "Release",
@@ -543,19 +522,14 @@
 					}
 				],
 				"post_deployment_actions": {
-					"instances": null,
-					"loadbalanced": false,
-					"loadbalancer": {
-						"TargetGroupName": "",
-						"TargetGroupPort": 0,
-						"TargetGroupProtocol": "",
-						"TargetType": "",
-						"VPCID": "",
-						"HealthCheckEnabled": false,
-						"HealthCheckPort": "",
-						"UnhealthyThresholdCount": 0
+					"loadbalancer": {}
+				},
+				"releases": [
+					{
+						"name": "consul",
+						"version": "latest"
 					}
-				}
+				]
 			},
 			{
 				"name": "Production",
@@ -695,20 +669,15 @@
 					}
 				],
 				"post_deployment_actions": {
-					"instances": null,
-					"loadbalanced": false,
-					"loadbalancer": {
-						"TargetGroupName": "",
-						"TargetGroupPort": 0,
-						"TargetGroupProtocol": "",
-						"TargetType": "",
-						"VPCID": "",
-						"HealthCheckEnabled": false,
-						"HealthCheckPort": "",
-						"UnhealthyThresholdCount": 0
-					}
+					"loadbalancer": {}
 				},
-				"cache_info": {}
+				"cache_info": {},
+				"releases": [
+					{
+						"name": "consul",
+						"version": "latest"
+					}
+				]
 			}
 		],
 		"exit_actions": {
@@ -777,13 +746,7 @@
 			"init": {
 				"command": "bin/start-service.sh"
 			}
-		},
-		"releases": [
-			{
-				"name": "consul",
-				"version": "latest"
-			}
-		]
+		}
 	},
 	"organization": {
 		"orgname": "Tutorial"
