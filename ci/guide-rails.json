@@ -724,11 +724,6 @@
 				"name": "source_dirs",
 				"value": "./",
 				"type": "string"
-			},
-			{
-				"name": "warden.centos.release.build",
-				"value": true,
-				"type": "boolean"
 			}
 		],
 		"deployment_files": [
