@@ -611,15 +611,10 @@
 						"availability_zones": [
 							"default"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
+						"deployment_strategy": {},
 						"dependencies": [
 							{
+								"id": "dccb10e9-9b24-4519-4394-7e5603a5cc9c",
 								"name": "consul",
 								"release": "consul",
 								"provides": [
@@ -672,8 +667,10 @@
 					"loadbalancer": {}
 				},
 				"cache_info": {},
+				"deployment_target": 1,
 				"releases": [
 					{
+						"id": "dccb10e9-9b24-4519-4394-7e5603a5cc9c",
 						"name": "consul",
 						"version": "latest"
 					}
