@@ -750,5 +750,195 @@
 	},
 	"organization": {
 		"orgname": "Tutorial"
+	},
+	"infrastructure": {
+		"stemcells": [
+			{
+				"alias": "windows1803",
+				"os": "windows1803",
+				"version": "latest"
+			},
+			{
+				"alias": "windows2012R2",
+				"os": "windows2012R2",
+				"version": "latest"
+			},
+			{
+				"alias": "centos-7",
+				"os": "centos-7",
+				"version": "latest"
+			},
+			{
+				"alias": "ubuntu-trusty",
+				"os": "ubuntu-trusty",
+				"version": "latest"
+			},
+			{
+				"alias": "ubuntu-xenial",
+				"os": "ubuntu-xenial",
+				"version": "latest"
+			},
+			{
+				"alias": "default",
+				"os": "ubuntu-trusty",
+				"version": "latest"
+			}
+		],
+		"resources": [
+			{
+				"name": "pipeline",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6001-test",
+					"version": "6.6.6",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "deployment",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6001-test",
+					"version": "6.6.6",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "eks-tools",
+				"image": {
+					"name": "docker-registry.service.consul:443/pipeline-image-eks-tools",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "idgenerator",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-id-generator",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "emitter",
+				"image": {
+					"name": "docker-registry.query.consul:443/guide-rails-emitter",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "git-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-git-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "gerrit-resource",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-gerrit-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "build-breaker",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-build-breaker",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "s3",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-s3-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "slack",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-slack-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "email",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-email-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "sonar",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-sonarqube-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "time",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-time-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "azure-blobstore",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-azure-blobstore-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "gr-gcs-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-gcs-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "veracode-scanner",
+				"image": {
+					"name": "docker-registry.query.consul:443/veracode-scanner",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "docker-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-docker-image",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "build",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-go-tools",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			}
+		],
+		"notification_configurations": [],
+		"vault": {},
+		"concourse": {
+			"address": "https://concourse-web.service.consul",
+			"team": "main"
+		},
+		"mq": {
+			"host": "rabbitmq.service.consul:5671"
+		},
+		"bosh": {}
 	}
 }
