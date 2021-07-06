@@ -698,16 +698,6 @@
 		},
 		"default_properties": [
 			{
-				"name": "centos.release.build",
-				"value": true,
-				"type": "boolean"
-			},
-			{
-				"name": "gr.host.address",
-				"value": " ",
-				"type": "string"
-			},
-			{
 				"name": "gr.veracode.static.scan",
 				"value": "false",
 				"type": "string"
