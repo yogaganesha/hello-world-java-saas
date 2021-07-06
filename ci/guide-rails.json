@@ -924,7 +924,7 @@
 			{
 				"name": "build",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-go-tools",
+					"name": "docker-registry.query.consul:443/pipeline-image-java-tools",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
