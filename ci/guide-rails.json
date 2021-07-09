@@ -771,223 +771,223 @@
 		"orgname": "Tutorial"
 	},
 	"infrastructure": {
-            "stemcells": [
-                {
-                    "alias": "ubuntu-xenial",
-                    "os": "ubuntu-xenial",
-                    "version": "latest"
-                },
-                {
-                    "alias": "windows1803",
-                    "os": "windows1803",
-                    "version": "latest"
-                },
-                {
-                    "alias": "default",
-                    "os": "ubuntu-xenial",
-                    "version": "latest"
-                },
-                {
-                    "alias": "windows2012R2",
-                    "os": "windows2012R2",
-                    "version": "latest"
-                }
-            ],
-            "resources": [
-                {
-                    "name": "pipeline",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/pipeline-image-cli",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "deployment",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/pipeline-image-cli",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "eks-tools",
-                    "image": {
-                        "name": "docker-registry.service.consul:443/pipeline-image-eks-tools",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "idgenerator",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-id-generator",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "emitter",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/guide-rails-emitter",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "git-resource",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-git-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "gerrit-resource",
-                    "image": {
-                        "name": "docker-registry.service.consul:443/gr-gerrit-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "build-breaker",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-build-breaker",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "s3",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/concourse-s3-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "slack",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/concourse-slack-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "email",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-email-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "sonar",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/concourse-sonarqube-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "time",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-time-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "azure-blobstore",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/concourse-azure-blobstore-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "gr-gcs-resource",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-gcs-resource",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "veracode-scanner",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/veracode-scanner",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "netsparker-scanner",
-                    "image": {
-                        "name": "docker-registry.service.consul:443/netsparker-scanner",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "docker-resource",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/gr-docker-image",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                },
-                {
-                    "name": "build",
-                    "image": {
-                        "name": "docker-registry.query.consul:443/pipeline-image-java-tools",
-                        "version": "latest",
-                        "location": "docker-registry.service.consul:443"
-                    }
-                }
-            ],
-            "notification_configurations": [
-                {
-                    "name": "CalculiEmail",
-                    "provider": "email",
-                    "properties": [
-                        {
-                            "name": "gr_email_host",
-                            "value": "smtp.office365.com",
-                            "when": "0001-01-01T00:00:00Z"
-                        },
-                        {
-                            "name": "gr_email_port",
-                            "value": "587",
-                            "when": "0001-01-01T00:00:00Z"
-                        },
-                        {
-                            "name": "gr_email_username",
-                            "value": "mailer@calculi.io",
-                            "when": "0001-01-01T00:00:00Z"
-                        },
-                        {
-                            "name": "gr_email_password",
-                            "value": "56TX*23sbi%!",
-                            "when": "0001-01-01T00:00:00Z"
-                        },
-                        {
-                            "name": "gr_email_from",
-                            "value": "mailer@calculi.io",
-                            "when": "0001-01-01T00:00:00Z"
-                        }
-                    ]
-                }
-            ],
-            "vault": {},
-            "concourse": {
-                "address": "https://concourse-web.service.consul",
-                "team": "main"
-            },
-            "mq": {
-                "host": "rabbitmq.service.consul:5671"
-            },
-            "bosh": {}
-        }
+		"stemcells": [
+			{
+				"alias": "ubuntu-trusty",
+				"os": "ubuntu-trusty",
+				"version": "latest"
+			},
+			{
+				"alias": "windows1803",
+				"os": "windows1803",
+				"version": "latest"
+			},
+			{
+				"alias": "default",
+				"os": "ubuntu-trusty",
+				"version": "latest"
+			},
+			{
+				"alias": "windows2012R2",
+				"os": "windows2012R2",
+				"version": "latest"
+			}
+		],
+		"resources": [
+			{
+				"name": "pipeline",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-cli",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "deployment",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-cli",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "eks-tools",
+				"image": {
+					"name": "docker-registry.service.consul:443/pipeline-image-eks-tools",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "idgenerator",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-id-generator",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "emitter",
+				"image": {
+					"name": "docker-registry.query.consul:443/guide-rails-emitter",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "git-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-git-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "gerrit-resource",
+				"image": {
+					"name": "docker-registry.service.consul:443/gr-gerrit-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "build-breaker",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-build-breaker",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "s3",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-s3-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "slack",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-slack-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "email",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-email-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "sonar",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-sonarqube-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "time",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-time-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "azure-blobstore",
+				"image": {
+					"name": "docker-registry.query.consul:443/concourse-azure-blobstore-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "gr-gcs-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-gcs-resource",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "veracode-scanner",
+				"image": {
+					"name": "docker-registry.query.consul:443/veracode-scanner",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "netsparker-scanner",
+				"image": {
+					"name": "docker-registry.service.consul:443/netsparker-scanner",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "docker-resource",
+				"image": {
+					"name": "docker-registry.query.consul:443/gr-docker-image",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			},
+			{
+				"name": "build",
+				"image": {
+					"name": "docker-registry.query.consul:443/pipeline-image-java-tools",
+					"version": "latest",
+					"location": "docker-registry.service.consul:443"
+				}
+			}
+		],
+		"notification_configurations": [
+			{
+				"name": "CalculiEmail",
+				"provider": "email",
+				"properties": [
+					{
+						"name": "gr_email_host",
+						"value": "smtp.office365.com",
+						"when": "0001-01-01T00:00:00Z"
+					},
+					{
+						"name": "gr_email_port",
+						"value": "587",
+						"when": "0001-01-01T00:00:00Z"
+					},
+					{
+						"name": "gr_email_username",
+						"value": "mailer@calculi.io",
+						"when": "0001-01-01T00:00:00Z"
+					},
+					{
+						"name": "gr_email_password",
+						"value": "56TX*23sbi%!",
+						"when": "0001-01-01T00:00:00Z"
+					},
+					{
+						"name": "gr_email_from",
+						"value": "mailer@calculi.io",
+						"when": "0001-01-01T00:00:00Z"
+					}
+				]
+			}
+		],
+		"vault": {},
+		"concourse": {
+			"address": "https://concourse-web.service.consul",
+			"team": "main"
+		},
+		"mq": {
+			"host": "rabbitmq.service.consul:5671"
+		},
+		"bosh": {}
+	}
 }
