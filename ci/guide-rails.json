@@ -90,7 +90,7 @@
 							{
 								"name": "print env",
 								"definition": "print env",
-								"command": "env | sort\n",
+								"command": "env | sort",
 								"properties": null
 							},
 							{
@@ -738,9 +738,8 @@
 			},
 			{
 				"name": "gr.whitesource.opensource.scan",
-				"description": "Enables WhiteSource scanning",
 				"value": 123,
-				"export_name": "",
+				"description": "Enables WhiteSource scanning",
 				"type": "number"
 			},
 			{
