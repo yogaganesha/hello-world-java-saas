@@ -126,7 +126,7 @@
 							{
 								"name": "print echo",
 								"definition": "print echo",
-								"command": "echo \"print me\" \n\n",
+								"command": "echo \"print me\" \n",
 								"properties": null
 							}
 						],
