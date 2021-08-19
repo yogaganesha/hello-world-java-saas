@@ -2,7 +2,6 @@
 
 Simple java app for testing JAVA_MAVEN language templates.
 
-test git-resource - 1
 
 
 
