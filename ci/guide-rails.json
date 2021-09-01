@@ -800,7 +800,7 @@
 			{
 				"name": "pipeline",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-test-GX-6500",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6500-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -808,7 +808,7 @@
 			{
 				"name": "deployment",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-test-GX-6500",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6500-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
