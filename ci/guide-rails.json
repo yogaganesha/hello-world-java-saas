@@ -296,7 +296,7 @@
 					{
 						"name": "known failing command",
 						"definition": "known failing command",
-						"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"\n\nexit 1",
+						"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"\n",
 						"properties": null
 					}
 				],
