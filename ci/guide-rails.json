@@ -202,87 +202,15 @@
 						"availability_zones": [
 							"default"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "120000-240000",
-							"update_watch_time": "120000-240000",
-							"serial": false
-						},
-						"dependencies": [
-							{
-								"name": "consul",
-								"release": "consul",
-								"provides": [
-									{
-										"name": "consul_servers.as",
-										"value": "consul_1"
-									}
-								],
-								"consumes": [
-									{
-										"name": "consul_servers.from",
-										"value": "consul_1"
-									}
-								],
-								"properties": [
-									{
-										"name": "consul.servicename",
-										"value": "((consul.servicename))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.environment",
-										"value": "((consul.environment))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.datacenter",
-										"value": "((consul.datacenter))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.server",
-										"value": "false",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.joinservers",
-										"value": "((consul.joinservers))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.cert",
-										"value": "grsecret:tls.cert",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.key",
-										"value": "grsecret:tls.key",
-										"when": "0001-01-01T00:00:00Z"
-									}
-								]
-							}
-						]
+						"deployment_strategy": {},
+						"dependencies": []
 					}
 				],
 				"post_deployment_actions": {
 					"loadbalancer": {}
 				},
 				"cache_info": {},
-				"tasks": [
-					{
-						"name": "simple-hello-world-java",
-						"steps": [
-							{
-								"name": "perform test",
-								"definition": "perform test",
-								"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
-								"properties": null
-							}
-						]
-					}
-				],
+				"deployment_target": 1,
 				"releases": [
 					{
 						"name": "consul",
@@ -342,86 +270,14 @@
 						"availability_zones": [
 							"default"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "5000-30000",
-							"update_watch_time": "5000-30000",
-							"serial": false
-						},
-						"dependencies": [
-							{
-								"name": "consul",
-								"release": "consul",
-								"provides": [
-									{
-										"name": "consul_servers.as",
-										"value": "consul_1"
-									}
-								],
-								"consumes": [
-									{
-										"name": "consul_servers.from",
-										"value": "consul_1"
-									}
-								],
-								"properties": [
-									{
-										"name": "consul.servicename",
-										"value": "((consul.servicename))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.environment",
-										"value": "((consul.environment))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.datacenter",
-										"value": "((consul.datacenter))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.server",
-										"value": "false",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.joinservers",
-										"value": "((consul.joinservers))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.cert",
-										"value": "grsecret:tls.cert",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.key",
-										"value": "grsecret:tls.key",
-										"when": "0001-01-01T00:00:00Z"
-									}
-								]
-							}
-						]
+						"deployment_strategy": {},
+						"dependencies": []
 					}
 				],
 				"post_deployment_actions": {
 					"loadbalancer": {}
 				},
-				"tasks": [
-					{
-						"name": "simple-hello-world-java",
-						"steps": [
-							{
-								"name": "known failing command",
-								"definition": "known failing command",
-								"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"\n",
-								"properties": null
-							}
-						]
-					}
-				],
+				"deployment_target": 1,
 				"releases": [
 					{
 						"name": "consul",
@@ -484,68 +340,8 @@
 						"availability_zones": [
 							"default"
 						],
-						"deployment_strategy": {
-							"canaries": 1,
-							"max_in_flight": 1,
-							"canary_watch_time": "5000-30000",
-							"update_watch_time": "5000-30000",
-							"serial": false
-						},
-						"dependencies": [
-							{
-								"name": "consul",
-								"release": "consul",
-								"provides": [
-									{
-										"name": "consul_servers.as",
-										"value": "consul_1"
-									}
-								],
-								"consumes": [
-									{
-										"name": "consul_servers.from",
-										"value": "consul_1"
-									}
-								],
-								"properties": [
-									{
-										"name": "consul.servicename",
-										"value": "((consul.servicename))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.environment",
-										"value": "((consul.environment))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.datacenter",
-										"value": "((consul.datacenter))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.server",
-										"value": "false",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.joinservers",
-										"value": "((consul.joinservers))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.cert",
-										"value": "grsecret:tls.cert",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.key",
-										"value": "grsecret:tls.key",
-										"when": "0001-01-01T00:00:00Z"
-									}
-								]
-							}
-						]
+						"deployment_strategy": {},
+						"dependencies": []
 					}
 				],
 				"post_deployment_actions": {
@@ -553,17 +349,10 @@
 				},
 				"tasks": [
 					{
-						"name": "simple-hello-world-java",
-						"steps": [
-							{
-								"name": "perform tests again",
-								"definition": "perform tests again",
-								"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
-								"properties": null
-							}
-						]
+						"name": "simple-hello-world-java"
 					}
 				],
+				"deployment_target": 1,
 				"releases": [
 					{
 						"name": "consul",
@@ -639,62 +428,7 @@
 							"default"
 						],
 						"deployment_strategy": {},
-						"dependencies": [
-							{
-								"id": "dccb10e9-9b24-4519-4394-7e5603a5cc9c",
-								"name": "consul",
-								"release": "consul",
-								"provides": [
-									{
-										"name": "consul_servers.as",
-										"value": "consul_1"
-									}
-								],
-								"consumes": [
-									{
-										"name": "consul_servers.from",
-										"value": "consul_1"
-									}
-								],
-								"properties": [
-									{
-										"name": "consul.servicename",
-										"value": "((consul.servicename))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.environment",
-										"value": "((consul.environment))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.datacenter",
-										"value": "((consul.datacenter))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.server",
-										"value": "false",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "consul.joinservers",
-										"value": "((consul.joinservers))",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.cert",
-										"value": "grsecret:tls.cert",
-										"when": "0001-01-01T00:00:00Z"
-									},
-									{
-										"name": "calculi.intermediate.key",
-										"value": "grsecret:tls.key",
-										"when": "0001-01-01T00:00:00Z"
-									}
-								]
-							}
-						]
+						"dependencies": []
 					}
 				],
 				"gated": true,
@@ -704,21 +438,7 @@
 				"cache_info": {},
 				"tasks": [
 					{
-						"name": "simple-hello-world-java",
-						"steps": [
-							{
-								"name": "perform prod test",
-								"definition": "perform prod test",
-								"command": "bin/integration-test.sh \u003e ${APPLICATION_LOGS_DIR}/output.txt",
-								"properties": null
-							},
-							{
-								"name": "get prod IP",
-								"definition": "get prod IP",
-								"command": "ip a",
-								"properties": null
-							}
-						]
+						"name": "simple-hello-world-java"
 					}
 				],
 				"deployment_target": 1,
