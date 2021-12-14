@@ -142,14 +142,6 @@
 				"run_after": [
 					"Build"
 				],
-				"job_steps": [
-					{
-						"name": "perform test",
-						"definition": "perform test",
-						"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
-						"properties": null
-					}
-				],
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
@@ -278,6 +270,19 @@
 					"loadbalancer": {}
 				},
 				"cache_info": {},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "perform test",
+								"definition": "perform test",
+								"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
+								"properties": null
+							}
+						]
+					}
+				],
 				"releases": [
 					{
 						"name": "consul",
@@ -291,14 +296,6 @@
 				"persistent": true,
 				"run_after": [
 					"Build"
-				],
-				"job_steps": [
-					{
-						"name": "known failing command",
-						"definition": "known failing command",
-						"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"\n",
-						"properties": null
-					}
 				],
 				"exit_actions": {
 					"default": {
@@ -412,6 +409,19 @@
 				"post_deployment_actions": {
 					"loadbalancer": {}
 				},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "known failing command",
+								"definition": "known failing command",
+								"command": "set -euxo pipefail\na=\"foo\"\necho $a\necho \"bar\"\n",
+								"properties": null
+							}
+						]
+					}
+				],
 				"releases": [
 					{
 						"name": "consul",
@@ -426,14 +436,6 @@
 				"run_after": [
 					"Integration",
 					"Isolation"
-				],
-				"job_steps": [
-					{
-						"name": "perform tests again",
-						"definition": "perform tests again",
-						"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
-						"properties": null
-					}
 				],
 				"exit_actions": {
 					"default": {
@@ -549,6 +551,19 @@
 				"post_deployment_actions": {
 					"loadbalancer": {}
 				},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "perform tests again",
+								"definition": "perform tests again",
+								"command": "bin/integration-test.sh \u003e ${TEST_LOGS_DIR}/tests.txt",
+								"properties": null
+							}
+						]
+					}
+				],
 				"releases": [
 					{
 						"name": "consul",
@@ -561,20 +576,6 @@
 				"segment_type": "production",
 				"run_after": [
 					"Release"
-				],
-				"job_steps": [
-					{
-						"name": "perform prod test",
-						"definition": "perform prod test",
-						"command": "bin/integration-test.sh \u003e ${APPLICATION_LOGS_DIR}/output.txt",
-						"properties": null
-					},
-					{
-						"name": "get prod IP",
-						"definition": "get prod IP",
-						"command": "ip a",
-						"properties": null
-					}
 				],
 				"exit_actions": {
 					"default": {
@@ -701,6 +702,25 @@
 					"loadbalancer": {}
 				},
 				"cache_info": {},
+				"tasks": [
+					{
+						"name": "simple-hello-world-java",
+						"steps": [
+							{
+								"name": "perform prod test",
+								"definition": "perform prod test",
+								"command": "bin/integration-test.sh \u003e ${APPLICATION_LOGS_DIR}/output.txt",
+								"properties": null
+							},
+							{
+								"name": "get prod IP",
+								"definition": "get prod IP",
+								"command": "ip a",
+								"properties": null
+							}
+						]
+					}
+				],
 				"deployment_target": 1,
 				"releases": [
 					{
