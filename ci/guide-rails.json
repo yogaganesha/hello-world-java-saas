@@ -119,20 +119,6 @@
 							}
 						],
 						"docker_options": {}
-					},
-					{
-						"name": "print-echo",
-						"steps": [
-							{
-								"name": "print echo",
-								"definition": "print echo",
-								"command": "echo \"print me\" \n",
-								"properties": null
-							}
-						],
-						"docker_options": {
-							"repository": "node:10"
-						}
 					}
 				]
 			},
