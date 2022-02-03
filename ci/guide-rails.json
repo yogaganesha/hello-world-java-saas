@@ -476,7 +476,7 @@
 			{
 				"name": "sample.p1",
 				"value": "test",
-				"description": "sample value does not allow  new lines\n\n",
+				"description": "sample value does not allow  new lines\n\nksjdf\nks\n\n\n",
 				"type": "string"
 			},
 			{
