@@ -474,6 +474,12 @@
 				"type": "string"
 			},
 			{
+				"name": "sample.p1",
+				"value": "test",
+				"description": "sample value does not allow  new lines\n\n",
+				"type": "string"
+			},
+			{
 				"name": "source_dirs",
 				"value": "./",
 				"type": "string"
