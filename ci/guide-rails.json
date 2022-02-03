@@ -152,6 +152,14 @@
 						}
 					}
 				},
+				"properties": [
+					{
+						"name": "p1.p",
+						"value": "a",
+						"description": "sample value does not allow  new lines\n\nksjdf\nks\n\n\n",
+						"type": "string"
+					}
+				],
 				"deployment_strategy": {
 					"canaries": 1,
 					"max_in_flight": 1,
