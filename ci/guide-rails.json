@@ -158,6 +158,12 @@
 						"value": "a",
 						"description": "sample value does not allow  new lines\n\nksjdf\nks\n\n\n",
 						"type": "string"
+					},
+					{
+						"name": "p2.p",
+						"value": "frre",
+						"description": "test\\nefefe \\n\\n\\n",
+						"type": "string"
 					}
 				],
 				"deployment_strategy": {
