@@ -550,7 +550,7 @@
 			{
 				"name": "pipeline",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-cat-220-gated-test",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-7080-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -558,7 +558,7 @@
 			{
 				"name": "deployment",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-cat-220-gated-test",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-7080-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
