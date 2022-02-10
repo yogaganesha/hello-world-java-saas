@@ -28,6 +28,18 @@
 			{
 				"name": "Build",
 				"segment_type": "build",
+				"publish_attributes": {
+					"publish": true,
+					"docker_images": [
+						{
+							"repository": "((application.name))",
+							"tags": [
+								"((application.version))"
+							],
+							"context": "."
+						}
+					]
+				},
 				"exit_actions": {
 					"default": {
 						"fetch_logs": true,
