@@ -489,12 +489,6 @@
 				"type": "string"
 			},
 			{
-				"name": "gr.whitesource.opensource.scan",
-				"value": 123,
-				"description": "Enables WhiteSource scanning",
-				"type": "number"
-			},
-			{
 				"name": "jdk.version",
 				"value": "12",
 				"type": "string"
