@@ -484,6 +484,11 @@
 		},
 		"default_properties": [
 			{
+				"name": "gr.sonarscanner.after_build",
+				"value": "true",
+				"type": "boolean"
+			},
+			{
 				"name": "gr.veracode.static.scan",
 				"value": "false",
 				"type": "string"
