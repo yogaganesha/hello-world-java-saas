@@ -94,7 +94,12 @@
 				"post_deployment_actions": {
 					"loadbalancer": {}
 				},
-				"cache_info": {},
+				"cache_info": {
+					"enabled": true,
+					"paths": [
+						"((maven.repo.local))"
+					]
+				},
 				"tasks": [
 					{
 						"name": "simple-hello-world-java",
