@@ -95,7 +95,6 @@
 					"loadbalancer": {}
 				},
 				"cache_info": {
-					"enabled": true,
 					"paths": [
 						"((maven.repo.local))"
 					]
