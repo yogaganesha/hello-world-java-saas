@@ -332,6 +332,11 @@
 				"type": "string"
 			},
 			{
+				"name": "rhel.release.build",
+				"value": "true",
+				"type": "boolean"
+			},
+			{
 				"name": "source_dirs",
 				"value": "./",
 				"type": "string"
