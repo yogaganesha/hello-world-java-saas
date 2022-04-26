@@ -382,7 +382,7 @@
 			{
 				"alias": "default",
 				"os": "ubuntu",
-				"version": "18.04.5"
+				"version": "18.04.6"
 			},
 			{
 				"alias": "centos-7",
@@ -394,7 +394,7 @@
 			{
 				"name": "pipeline",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-cat-257-test",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-7287-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -402,7 +402,7 @@
 			{
 				"name": "deployment",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli-cat-257-test",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-7287-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
