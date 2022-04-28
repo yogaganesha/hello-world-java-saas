@@ -132,6 +132,12 @@
 								"definition": "list ",
 								"command": "ls -R",
 								"properties": null
+							},
+							{
+								"name": "convert-coverage",
+								"definition": "convert-coverage",
+								"command": "cp target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml test.xml",
+								"properties": null
 							}
 						],
 						"docker_options": {}
