@@ -136,7 +136,7 @@
 							{
 								"name": "convert-coverage",
 								"definition": "convert-coverage",
-								"command": "cp target/surefire-reports/TEST-com.javacodegeeks.example.HelloWorldApplicationTests.xml test.xml",
+								"command": "cp target/surefire-reports/TEST-*.xml test.xml",
 								"properties": null
 							}
 						],
