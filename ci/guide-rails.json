@@ -405,7 +405,7 @@
 			{
 				"name": "pipeline",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6978-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -413,7 +413,7 @@
 			{
 				"name": "deployment",
 				"image": {
-					"name": "docker-registry.query.consul:443/pipeline-image-cli",
+					"name": "docker-registry.query.consul:443/pipeline-image-cli-gx-6978-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -437,7 +437,7 @@
 			{
 				"name": "emitter",
 				"image": {
-					"name": "docker-registry.query.consul:443/guide-rails-emitter",
+					"name": "docker-registry.query.consul:443/guide-rails-emitter-gx-6978-test",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
@@ -493,7 +493,7 @@
 			{
 				"name": "sonar",
 				"image": {
-					"name": "docker-registry.query.consul:443/concourse-sonarqube-resource-gx-7304-test",
+					"name": "docker-registry.query.consul:443/concourse-sonarqube-resource",
 					"version": "latest",
 					"location": "docker-registry.service.consul:443"
 				}
