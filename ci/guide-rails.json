@@ -112,7 +112,7 @@
 							{
 								"name": "build",
 								"definition": "build",
-								"command": "mvn compile\n",
+								"command": "mvn compile",
 								"properties": null
 							},
 							{
