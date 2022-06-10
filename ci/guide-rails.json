@@ -37,14 +37,6 @@
 								"((application.version))"
 							],
 							"context": "."
-						},
-						{
-							"repository": "((application.name))-java",
-							"dockerFilePath": "DockerJava",
-							"tags": [
-								"((application.version))"
-							],
-							"context": "."
 						}
 					]
 				},
