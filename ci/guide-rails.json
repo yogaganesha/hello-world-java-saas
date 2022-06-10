@@ -73,25 +73,6 @@
 					"serial": false
 				},
 				"application_init": {},
-				"packages": [
-					{
-						"name": "HelloWorld",
-						"downloads": [],
-						"files": [
-							"target/HelloWorld*"
-						]
-					},
-					{
-						"name": "jdk",
-						"downloads": [
-							{
-								"link": "https://s3.amazonaws.com/calculi-middleware/jdk-((jdk.version))_linux-x64_bin.tar.gz",
-								"name": "jdk.tar.gz"
-							}
-						],
-						"package_install_command": "tar xzf jdk/jdk.tar.gz\ncp -Rf jdk-((jdk.version))/* ${BOSH_INSTALL_TARGET}"
-					}
-				],
 				"instance_tags": [
 					{
 						"name": "application.name",
@@ -149,10 +130,6 @@
 				"process": {
 					"init": {}
 				},
-				"package_dependencies": [
-					"HelloWorld",
-					"jdk"
-				],
 				"instance_tags": [
 					{
 						"name": "application.name",
@@ -231,10 +208,6 @@
 						"command": "bin/start-service.sh "
 					}
 				},
-				"package_dependencies": [
-					"HelloWorld",
-					"jdk"
-				],
 				"instance_tags": [
 					{
 						"name": "application.name",
@@ -419,14 +392,19 @@
 						"deploy_application": true
 					}
 				],
-				"deployment_target": 2
+				"deployment_target": 2,
+				"releases": [
+					{
+						"name": "consul",
+						"version": "latest"
+					}
+				]
 			}
 		],
 		"exit_actions": {
 			"default": {
 				"fetch_logs": true,
 				"code_analysis": {
-					"publish": true,
 					"properties": []
 				},
 				"delete_instances": true
@@ -483,13 +461,7 @@
 			"init": {
 				"command": "bin/start-service.sh"
 			}
-		},
-		"releases": [
-			{
-				"name": "consul",
-				"version": "latest"
-			}
-		]
+		}
 	},
 	"organization": {
 		"orgname": "Tutorial"
