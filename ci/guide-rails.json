@@ -340,7 +340,7 @@
 				"k8s_instance_groups": [
 					{
 						"tool_config_alias_id": "92a51d68-9da6-4e80-6607-95ad93d73392",
-						"docker_registry_alias_id": "f2747933-0a4b-4ba8-743b-7296b63a05b1",
+						"docker_registry_alias_id": "b7538d0f-4373-4d39-7300-76e6642699b1",
 						"name": "((application.name))",
 						"cluster_name": "",
 						"namespace": "((application.name))-((application.branch))",
@@ -348,7 +348,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "github/((application.name)):((application.version))",
+								"image": "yogaganesha/((application.name)):((application.version))",
 								"ports": [
 									{
 										"name": "endpoint1",
