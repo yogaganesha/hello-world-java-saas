@@ -37,14 +37,6 @@
 								"((application.version))"
 							],
 							"context": "."
-						},
-						{
-							"repository": "((application.name))-java",
-							"dockerFilePath": "DockerJava",
-							"tags": [
-								"((application.version))"
-							],
-							"context": "."
 						}
 					]
 				},
@@ -436,12 +428,7 @@
 				"type": "string"
 			}
 		],
-		"deployment_files": [
-			{
-				"source_path": "ci/bin/start-service.sh",
-				"target_path": "bin/start-service.sh"
-			}
-		],
+		"deployment_files": [],
 		"application_init": {},
 		"process": {
 			"init": {
