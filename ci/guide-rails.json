@@ -348,7 +348,7 @@
 						"containers": [
 							{
 								"name": "((application.name))",
-								"image": "((application.name)):((application.version))",
+								"image": "github/((application.name)):((application.version))",
 								"ports": [
 									{
 										"name": "endpoint1",
